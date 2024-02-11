@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "timestamp-sj": {
+      "hosting": {
+        "timestamp": [
+          "timestamp-sj"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "timestamp-sj"
+  }
+}
