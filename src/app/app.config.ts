@@ -15,7 +15,9 @@ export const appConfig: ApplicationConfig = {
       "storageBucket":"timestamp-sj.appspot.com",
       "apiKey":"AIzaSyAWk7w3yszuMjftuGREWou9TK0U1byfc7o",
       "authDomain":"timestamp-sj.firebaseapp.com",
-      "messagingSenderId":"403380079015","measurementId":"G-QZGHZ8YTNH"
+      "messagingSenderId":"403380079015",
+      "measurementId":"G-QZGHZ8YTNH",
+      "databaseURL": "https://timestamp-sj-default-rtdb.europe-west1.firebasedatabase.app"
     }))),
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideDatabase(() => getDatabase())),
