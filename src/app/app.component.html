@@ -13,19 +13,12 @@
   }
 </div>
 
-
-
-<ul>
-  @for (activity of (activities$ | async); track activity.id) {
-    <li (click)="logAcvtivity(activity)">{{ activity.name }}</li>
-  }
-</ul>
-
 <h2>View log</h2>
 
-<!--<ul>
-  @for(logItem of log$; track logItem.id) {
-    <li>{{ logItem.id }}</li>
+<ul>
+  @for(logItem of log$ | async; track logItem.id) {
+    <li>{{ logItem.activity }} -
+      {{ logItem.timestamp | date: 'dd.MM HH:mm' }}</li>
   }
-</ul>-->
+</ul>
 
