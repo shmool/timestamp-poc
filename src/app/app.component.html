@@ -1,5 +1,13 @@
 <h1>Welcome to TimeStamp!</h1>
-{{ activities$ | async| json }}
+<h2>User</h2>
+<ul>
+  <li>user: {{ user$ | async | json }}</li>
+  <li>authState: {{ authState$ | async | json }}</li>
+  <li>idToken: {{ idToken$ | async | json }}</li>
+</ul>
+
+<button (click)="signInAnonymously()">Sign in anonymously</button>
+<button (click)="signInWithGoogle()">Sign in with Google</button>
 
 <h2>Add button</h2>
 
