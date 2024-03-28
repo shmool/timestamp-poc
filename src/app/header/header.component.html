@@ -1,0 +1,8 @@
+<h1>Welcome to TimeStamp!</h1>
+@for (route of routes; track route.path) {
+  <a [routerLink]="route.path" routerLinkActive="active">{{ route.title }}</a>
+  @if (!$last) {
+    |
+  }
+}
+

@@ -1,0 +1,38 @@
+
+@if (user$ | async; as user) {
+
+  @if (user.isAnonymous) {
+    <h2>Hello, user!</h2>
+    <p>You're currently signed in anonymously.
+      This means you can use the app and your data will be stored
+      (the actions you create and log), but you're limited
+      to five actions and 100 log items.
+      You can sign in with your google account.
+      Then your current data will be kept
+      (transitioned to your signed-up user data)
+      and you'll be able to store more activities and log items.</p>
+
+    <button (click)="signInWithGoogle()">Sign in with Google</button>
+
+    <p>You can remove all your data by signing out -
+      you won't be able to restore your saved actions and log items.</p>
+  } @else {
+    <h2>Hello, {{ user.providerData[0].displayName }}!</h2>
+    <img [src]="user.providerData[0].photoURL" />
+    <p>You're signed in with Google, with the email address
+      <b>{{ user.email }}</b>.</p>
+  }
+
+  <button (click)="signOut()">Sign Out</button>
+} @else {
+  <h2>Hello!</h2>
+  <p>You're not signed in. If you want to start using this app
+    you need to sign in either anonymously or with Google.
+    You can start as an anonymous user with limited storage,
+    then upgrade using your Google account, keeping your data.</p>
+  <button (click)="signInAnonymously()">Sign in anonymously</button>
+  <button (click)="signInWithGoogle()">Sign in with Google</button>
+}
+
+
+

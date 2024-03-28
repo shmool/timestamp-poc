@@ -1,5 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, User, authState, idToken, signInAnonymously, user } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  User,
+  authState,
+  idToken,
+  signInAnonymously,
+  user,
+  signInWithPopup, linkWithPopup
+} from '@angular/fire/auth';
 import { Database, push, ref, set } from '@angular/fire/database';
 
 @Injectable({
@@ -11,6 +20,7 @@ export class UserService {
   authState$ = authState(this.auth);
   idToken$ = idToken(this.auth);
   userData: User | null | undefined;
+  currentUser = this.auth.currentUser;
 
   private database: Database = inject(Database);
 
@@ -30,5 +40,38 @@ export class UserService {
       };
       set(ref(this.database, `users/${userCred.user.uid}`), newUserObj)
     });
+  }
+
+  signInWithGoogle() {
+
+    const provider = new GoogleAuthProvider();
+    console.log('current user:', this.auth.currentUser);
+
+    if (this.auth.currentUser) {
+      linkWithPopup(this.auth.currentUser!, provider).then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        console.log("Anonymous account successfully upgraded", user);
+
+        const newUserObj: any = {
+          id: user.uid,
+          isAnonymous: false,
+          name: user.displayName,
+          email: user.email,
+          avatar: user.photoURL
+        };
+        set(ref(this.database, `users/${user.uid}`), newUserObj)
+
+      }).catch((error) => {
+        console.log("Error upgrading anonymous account", error);
+      });
+
+    } else {
+      signInWithPopup(this.auth, provider)
+    }
+  }
+
+  signOut() {
+    this.auth.signOut();
   }
 }

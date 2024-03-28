@@ -1,32 +1,10 @@
-<h1>Welcome to TimeStamp!</h1>
-<h2>User</h2>
-<ul>
-  <li>user: {{ user$ | async | json }}</li>
-  <li>authState: {{ authState$ | async | json }}</li>
-  <li>idToken: {{ idToken$ | async | json }}</li>
-</ul>
+<app-header></app-header>
 
-<button (click)="signInAnonymously()">Sign in anonymously</button>
-<button (click)="signInWithGoogle()">Sign in with Google</button>
+<router-outlet></router-outlet>
 
-<h2>Add button</h2>
 
-<input (keyup.enter)="newActivity(activityInput)" #activityInput/>
-<button (click)="newActivity(activityInput)">Add Activity</button>
 
-<h2>Log activity</h2>
-<div>
-  @for (activity of (activities$ | async); track activity.id) {
-    <button (click)="logAcvtivity(activity)">{{ activity.name }}</button>
-  }
-</div>
 
-<h2>View log</h2>
 
-<ul>
-  @for(logItem of log$ | async; track logItem.id) {
-    <li>{{ logItem.activity }} -
-      {{ logItem.timestamp | date: 'dd.MM HH:mm' }}</li>
-  }
-</ul>
+
 

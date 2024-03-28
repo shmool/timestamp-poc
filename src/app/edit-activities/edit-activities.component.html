@@ -1,0 +1,23 @@
+<h2>Add button</h2>
+
+<input (keyup.enter)="newActivity(newActivityNameInput, newActivityColorInput)" #newActivityNameInput/>
+<input type="color" value="#AAAAAA" #newActivityColorInput/>
+<button (click)="newActivity(newActivityNameInput, newActivityColorInput)">Add Activity</button>
+
+<ul>
+  @for (activity of activities$ | async; track activity.id) {
+    <li>
+      @if (!activity.editing) {
+        <button [style]="'background-color:' + activity.color">
+          {{ activity.name }}</button>
+        <button (click)="editActivity(activity)">Edit</button>
+        <button (click)="deleteActivity(activity)">Delete</button>
+      } @else {
+        <input [value]="activity.name" #editActivityName />
+        <input [value]="activity.color" type="color" #editActivityColor/>
+        <button (click)="saveChanges(activity, editActivityName.value, editActivityColor.value)">Save</button>
+        <button (click)="cancelChanges(activity)">Cancel</button>
+    }
+    </li>
+  }
+</ul>

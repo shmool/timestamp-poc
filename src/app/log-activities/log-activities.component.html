@@ -1,0 +1,9 @@
+<h2>Log activity</h2>
+<div>
+  @for (activity of (activities$ | async); track activity.id) {
+    <button (click)="logAcvtivity(activity)"
+            [style]="'background-color:' + activity.color">
+      {{ activity.name }}
+    </button>
+  }
+</div>
